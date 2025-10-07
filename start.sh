@@ -1,10 +1,12 @@
 #!/bin/bash
+
+# Exit immediately if a command exits with a non-zero status
 set -e
 
+echo "Starting Telegram bot + FastAPI dashboard..."
+
+# Install dependencies (if not already installed in the environment)
 pip install -r requirements.txt
 
-# Start FastAPI web dashboard in background
-uvicorn web_dashboard:app --host 0.0.0.0 --port $PORT &
-
-# Start Telegram bot
+# Run main.py (bot + dashboard)
 python main.py
