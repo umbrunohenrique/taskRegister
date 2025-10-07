@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Telegram Bot Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            margin-top: 40px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td img {
+            max-width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Telegram Bot Dashboard</h1>
+    {% for user in users %}
+    <h2>User: {{ user.telegram_id }}</h2>
+    {% for act in user.activities %}
+    <h3>Activity: {{ act.id }} | {{ act.created_at }} | Pending photo: {{ act.pending_photo }}</h3>
+    <h4>Notes:</h4>
+    <ul>
+        {% for note in act.notes %}
+        <li>[{{ note.type }}] {{ note.text }} ({{ note.timestamp }})</li>
+        {% endfor %}
+    </ul>
+    <h4>Media:</h4>
+    <ul>
+        {% for media in act.media %}
+        <li>{{ media.caption }} <br>
+            <img src="/{{ media.filename | replace('uploads/', 'uploads/') }}" alt="media">
+        </li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+    {% endfor %}
+</body>
+
+</html>
